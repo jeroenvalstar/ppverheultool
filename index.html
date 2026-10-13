@@ -248,6 +248,67 @@ p.hint.pad{margin:0;padding-bottom:4px;font-size:.85rem;color:var(--ink-2)}
 .field label .sw{margin-right:8px}
 .cohbtn.quiet{opacity:.55}
 #cohform{scroll-margin-top:80px}
+/* --- v4: clip settings, title, responsive --- */
+.warnbox{background:var(--pepper-tint);border-left:4px solid var(--pepper);border-radius:12px;padding:12px 14px;margin:0 0 16px}
+.warnbox b{display:block;color:var(--pepper);margin-bottom:4px}
+.warnbox p{margin:0;font-size:.9rem;line-height:1.45}
+.crow{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-top:1px solid var(--line)}
+.fset > h3 + .crow{border-top:0}
+.crow-t{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.crow-t small{color:var(--ink-2);font-size:.8rem}
+.crow-b{margin-left:auto;display:flex;gap:6px;flex:none}
+.ib{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.ib:disabled{opacity:.3;cursor:default}
+.ib.del{color:var(--pepper)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px 16px}
+.chip{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:0 14px 0 10px;min-height:44px;font-weight:600;cursor:pointer}
+.chip .sw{margin-right:8px;width:16px;height:16px;border-radius:50%}
+.inp.wide{width:12em;text-align:left}
+.titleprev{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.titleprev img{width:40px}
+.titleprev b{font-family:var(--font-head);font-size:1.1rem;display:block}
+.titleprev small{color:var(--ink-2)}
+h2.first{margin-top:22px}
+.brand{display:none}
+@media (hover:hover){ .btn:hover,.ib:hover:not(:disabled),.chip:hover,.cohbtn:hover,.seg button:hover{border-color:var(--ink-2)} .list a:hover{background:var(--surface-2)} }
+@media (max-width:374px){ nav.tabs a{font-size:.6rem} main{padding-left:12px;padding-right:12px} .wk b{font-size:2.8rem} .inp{width:6.5em} }
+
+/* tablets and laptops */
+@media (min-width:760px){
+  .split{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:24px;align-items:start}
+  .split h2.first{margin-top:0}
+  .totals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .totals > div:last-child:nth-child(odd){grid-column:1/-1}
+  .split .kv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wkgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+  .wkgrid .wkcol:last-child{position:sticky;top:76px}
+  .setgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
+  .setgrid h2:first-child{margin-top:0}
+  .preview{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .chartbox .cv{height:400px}
+  .narrow{max-width:640px}
+  .fset:has(.pair){max-width:760px}
+  #main > .fset, #main > .list, #main > .note, #main > .btnrow{max-width:760px}
+}
+@media (min-width:1000px){
+  :root{--side:232px}
+  nav.tabs{top:0;right:auto;width:var(--side);border-top:0;border-right:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 18px) 12px 18px;background:var(--surface)}
+  nav.tabs .in{display:flex;flex-direction:column;gap:4px;max-width:none}
+  nav.tabs a{flex-direction:row;justify-content:flex-start;gap:12px;font-size:.95rem;padding:11px 14px;min-height:46px;border-radius:12px;letter-spacing:0}
+  nav.tabs a[aria-current="page"]{background:var(--leaf-tint)}
+  nav.tabs a:hover{background:var(--surface-2)}
+  .brand{display:flex;align-items:center;gap:10px;padding:2px 10px 18px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+  .brand img{width:42px}
+  .brand b{font-family:var(--font-head);font-size:.95rem;line-height:1.2;display:block}
+  .brand small{color:var(--ink-2);font-size:.8rem}
+  .bar,main{margin-left:var(--side)}
+  .bar .bar-in > img{display:none}
+  .bar-in{max-width:1240px;padding:12px 32px}
+  main{max-width:1240px;padding:24px 32px 56px}
+  .tw{max-height:calc(100vh - 170px)}
+  .toast{bottom:28px;left:calc(50% + var(--side)/2)}
+  .wkgrid{gap:24px}
+}
 </style>
 </head>
 <body>
@@ -4036,6 +4097,28 @@ Object.assign(TR, {
   harvestWeek:["Erntewoche","Oogstweek","Harvest week"]
 });
 Object.assign(TR,{ tabBer:["Berechnung","Berekening","Calculation"] });
+Object.assign(TR, {
+  appTitle:["Pflanzenregistrierung {y}","Registratie planten {y}","Plant registration {y}"],
+  general:["Allgemein","Algemeen","General"],
+  itGeneral:["Titel und Jahr","Titel en jaar","Title and year"],
+  cropLbl:["Titel (Kultur)","Titel (teelt)","Title (crop)"],
+  cropHint:["Erscheint als Untertitel, z. B. Gelb Paprika","Verschijnt als ondertitel, bijv. Gelb Paprika","Shown as the subtitle, e.g. Gelb Paprika"],
+  yearLbl:["Jahr","Jaar","Year"],
+  yearHint:["Erscheint im Seitentitel","Verschijnt in de paginatitel","Shown in the page title"],
+  clipWarnTitle:["Achtung bei Änderungen während der Saison","Let op bij wijzigen tijdens het seizoen","Careful when changing mid-season"],
+  clipWarnText:["Wenn du Reihenfolge, Anzahl der Farben oder Startwoche mitten im Jahr änderst, können sich die Clipfarben aller Wochen in der Tabelle und bei der Wocheneingabe ändern, ebenso wie viele Wochen bei den Clips angezeigt werden. Eingetragene Zahlen bleiben bei ihrer Woche, aber die zugehörige Farbe kann eine andere werden. Mach vorher am besten einen Excel-Export.","Als je de volgorde, het aantal kleuren of de startweek halverwege het jaar wijzigt, kunnen de clipkleuren van alle weken in de tabel en bij het invullen veranderen, en ook hoeveel weken er bij de clips worden getoond. Ingevulde aantallen blijven bij hun week, maar de kleur die erbij hoort kan anders worden. Maak vooraf het liefst een Excel-export.","If you change the order, number of colours or start week mid-year, the clip colours of all weeks in the table and in the weekly entry can change, as can how many weeks are shown for clips. Entered numbers stay with their week, but the colour attached to them may change. It’s best to export to Excel first."],
+  clipConfirm:["Clipfarben ändern? Die Farben aller Wochen in der Tabelle können sich dadurch ändern.","Clipkleuren wijzigen? De kleuren van alle weken in de tabel kunnen hierdoor veranderen.","Change clip colours? The colours of all weeks in the table may change as a result."],
+  clipOrder:["Reihenfolge","Volgorde","Order"],
+  addColour:["Farbe hinzufügen","Kleur toevoegen","Add colour"],
+  moveUp:["Nach oben","Omhoog","Move up"],
+  moveDown:["Nach unten","Omlaag","Move down"],
+  remove:["Entfernen","Verwijderen","Remove"],
+  clipCountInfo:["{n} Farben: bei der Wocheneingabe siehst du {n} Clipfarben, und Clips werden bis zu {k} Wochen nach dem Setzen eingetragen.","{n} kleuren: bij het invullen van de week zie je {n} clipkleuren, en clips worden tot {k} weken na het zetten ingevuld.","{n} colours: the weekly entry shows {n} clip colours, and clips are entered up to {k} weeks after setting."],
+  allUsed:["Alle Farben sind bereits in der Liste.","Alle kleuren staan al in de lijst.","All colours are already in the list."],
+  startWeekHint:["Danach folgen die Farben automatisch; nach der letzten Farbe beginnt es von vorn.","Daarna volgen de kleuren vanzelf; na de laatste kleur begint het opnieuw.","The colours then follow automatically; after the last colour it starts again."],
+  clipCycleLead:["Jede Woche hängt eine neue Clipfarbe, in dieser Reihenfolge. Wochen, für die im Excel-Bestand schon eine Farbe stand, behalten diese.","Elke week hangt er een nieuwe clipkleur, in deze volgorde. Weken waarvoor in het Excel-bestand al een kleur stond, houden die kleur.","Each week a new clip colour is hung, in this order. Weeks that already had a colour in the Excel file keep it."],
+  itClips:["Clipfarben, Reihenfolge und Startwoche","Clipkleuren, volgorde en startweek","Clip colours, order and start week"]
+});
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
 const nf = {};
@@ -4077,8 +4160,8 @@ const ICON = {
 };
 
 /* ---------- column definitions (Start tab): n/u = [de, nl, en] ---------- */
-const CLIPS = {"Gelb":"#F3C21B","Beige":"#D8C29C","Orange":"#EF7D16","Braun":"#8A5A2B","Grün":"#3E9B3A","Weiss":"#FFFFFF","Blau":"#1F6FC0","Rot":"#D32F2F","Rosa":"#F48FB1","Lila":"#8E44AD","Schwarz":"#222222","Grau":"#9E9E9E"};
-const CLIPN = {"Gelb":["Gelb","Geel","Yellow"],"Beige":["Beige","Beige","Beige"],"Orange":["Orange","Oranje","Orange"],"Braun":["Braun","Bruin","Brown"],"Grün":["Grün","Groen","Green"],"Weiss":["Weiß","Wit","White"],"Blau":["Blau","Blauw","Blue"],"Rot":["Rot","Rood","Red"],"Rosa":["Rosa","Roze","Pink"],"Lila":["Lila","Paars","Purple"],"Schwarz":["Schwarz","Zwart","Black"],"Grau":["Grau","Grijs","Grey"]};
+const CLIPS = {"Rot":"#D32F2F","Orange":"#EF7D16","Gelb":"#F3C21B","Grün":"#3E9B3A","Hellgrün":"#9CCC65","Blau":"#1F6FC0","Hellblau":"#64B5F6","Dunkelblau":"#1A237E","Türkis":"#26A69A","Lila":"#8E44AD","Rosa":"#F48FB1","Braun":"#8A5A2B","Beige":"#D8C29C","Weiss":"#FFFFFF","Grau":"#9E9E9E","Schwarz":"#222222"};
+const CLIPN = {"Gelb":["Gelb","Geel","Yellow"],"Beige":["Beige","Beige","Beige"],"Orange":["Orange","Oranje","Orange"],"Braun":["Braun","Bruin","Brown"],"Grün":["Grün","Groen","Green"],"Weiss":["Weiß","Wit","White"],"Blau":["Blau","Blauw","Blue"],"Rot":["Rot","Rood","Red"],"Rosa":["Rosa","Roze","Pink"],"Lila":["Lila","Paars","Purple"],"Schwarz":["Schwarz","Zwart","Black"],"Grau":["Grau","Grijs","Grey"],"Hellgrün":["Hellgrün","Lichtgroen","Light green"],"Hellblau":["Hellblau","Lichtblauw","Light blue"],"Dunkelblau":["Dunkelblau","Donkerblauw","Dark blue"],"Türkis":["Türkis","Turquoise","Turquoise"]};
 const clipName = v => CLIPN[v] ? tl(CLIPN[v]) : v;
 const C = {
   B:{n:["Licht außen","Licht buiten","Outside light"],u:["J/cm² pro Woche","J/cm² per week","J/cm² per week"],in:1,d:0},
@@ -4145,7 +4228,7 @@ function legacyToCoh(get){
 const DEF_COH = legacyToCoh(k=>ORIG[k]);
 for (let r=4;r<=53;r++){ for (const c of LEGACY) delete DEFAULTS["S!"+c+r];
   if (!(Number(ORIG["S!M"+r])>0)) delete DEFAULTS["S!AL"+r]; }   // planned colours without clips follow the cycle
-Object.assign(DEFAULTS, DEF_COH, {"X!clips":"Gelb,Beige,Orange,Braun,Grün,Weiss,Blau,Rot","X!clipStart":35,"X!window":8});
+Object.assign(DEFAULTS, DEF_COH, {"X!clips":"Gelb,Beige,Orange,Braun,Grün,Weiss,Blau,Rot","X!clipStart":35,"X!crop":"Gelb Paprika","X!year":2026});
 
 let COH = {};                                         // s -> {k: {a,g,r}}
 function buildCoh(){
@@ -4176,9 +4259,13 @@ function cohTotals(s, uptoK){
   for (const k in e){ if (uptoK!==undefined && +k>uptoK) continue; a+=e[k].a; g+=e[k].g; r+=e[k].r; }
   const set = Mset(s); return {set,a,g,r,removed:a+g+r,open:set-a-g-r};
 }
-const WIN = () => Math.max(1, Math.min(13, Number(raw("X!window"))||8));
+const clipList = () => String(raw("X!clips")).split(",").map(x=>x.trim()).filter(Boolean);
+const WIN = () => Math.max(1, clipList().length - 1);      // clips are entered up to (colours − 1) weeks after setting
+const cropName = () => String(raw("X!crop")).trim() || "Gelb Paprika";
+const yearVal = () => raw("X!year") || 2026;
+const appTitle = () => t("appTitle",{y:yearVal()});
 function cycleColour(w){
-  const list = String(raw("X!clips")).split(",").map(x=>x.trim()).filter(Boolean); if (!list.length) return "";
+  const list = clipList(); if (!list.length) return "";
   const st = Number(raw("X!clipStart"))||1; return list[(((w-st)%list.length)+list.length)%list.length];
 }
 function clipOf(w){ const v = String(raw("S!AL"+(w+3))).trim(); return v || cycleColour(w); }
@@ -4268,14 +4355,15 @@ function go(r){ if (location.hash.slice(1)===r){ refresh(); window.scrollTo(0,0)
 window.addEventListener("hashchange", ()=>{ route = location.hash.slice(1) || "start"; ui.finishWarn=false; refresh(); window.scrollTo(0,0); });
 function tabOf(r){ return r.startsWith("inst") ? "inst" : r; }
 function renderTabs(){
-  $("#tabs").innerHTML = TABS.map(x=>`<a href="#${x.id}" ${tabOf(route)===x.id?'aria-current="page"':''}>${ICON[x.ico]}<span>${t(x.k)}</span></a>`).join("");
+  $("#tabs").innerHTML = `<div class="brand"><img src="${MARK}" alt="PP Verheul"><span><b>${esc(appTitle())}</b><small>${esc(cropName())}</small></span></div>` + TABS.map(x=>`<a href="#${x.id}" ${tabOf(route)===x.id?'aria-current="page"':''}>${ICON[x.ico]}<span>${t(x.k)}</span></a>`).join("");
 }
 function renderBar(){
   const p = PAGES[route] || PAGES.start;
   const sub = p.sub ? `<button class="back" aria-label="${t("back")}" onclick="go('${p.parent}')">${ICON.back}</button>` : `<img src="${MARK}" alt="PP Verheul">`;
   const syncTxt = store.mode==="db" ? (store.readOnly?t("syncRO"):t("syncShared")) : t("syncLocal");
   const title = typeof p.title==="function" ? p.title() : p.title;
-  const subtitle = p.subtitle ? p.subtitle() : "2016 Gelb Paprika 2026";
+  const subtitle = p.subtitle ? p.subtitle() : cropName();
+  document.title = appTitle() + " – " + cropName();
   $("#bar").innerHTML = `${sub}<h1>${esc(title)}<small>${esc(subtitle)}</small></h1><span class="sync ${store.mode==="db"?"on":""}" title="${syncTxt}"><i></i><span>${syncTxt}</span></span>`;
 }
 function refresh(fromSync){
@@ -4299,16 +4387,22 @@ document.addEventListener("input", e=>{
   const s=document.querySelector(".saved"); if(s) s.textContent=t("saving");
   const p = PAGES[route]; if (p && p.onInput) p.onInput(el.dataset.key);
 });
+// Enter jumps to the next field (keyboard "next" on phones)
+document.addEventListener("keydown", e=>{
+  if (e.key!=="Enter" || !e.target.classList || !e.target.classList.contains("inp") || e.target.tagName==="SELECT") return;
+  e.preventDefault(); const all=[...document.querySelectorAll("#main .inp:not([disabled])")]; const i=all.indexOf(e.target);
+  if (i>=0 && all[i+1]) all[i+1].focus(); else e.target.blur();
+});
 function numField(key,label,hint,opts={}){
   const v = raw(key);
-  return `<div class="field"><label for="f_${key}">${label}</label><input class="inp ${opts.cls||""}" id="f_${key}" inputmode="decimal" autocomplete="off" value="${esc(inFmt(v))}" data-key="${key}" ${store.readOnly?"disabled":""}>${hint||opts.prev?`<div class="hint">${hint||""}${opts.prev?`<span class="prev">${opts.prev}</span>`:""}</div>`:""}</div>`;
+  return `<div class="field"><label for="f_${key}">${label}</label><input class="inp ${opts.cls||""}" id="f_${key}" inputmode="decimal" enterkeyhint="next" autocomplete="off" value="${esc(inFmt(v))}" data-key="${key}" ${store.readOnly?"disabled":""}>${hint||opts.prev?`<div class="hint">${hint||""}${opts.prev?`<span class="prev">${opts.prev}</span>`:""}</div>`:""}</div>`;
 }
-function inpCell(key,label){ const v=raw(key); return `<input class="inp" inputmode="decimal" autocomplete="off" aria-label="${esc(label||key)}" value="${esc(inFmt(v))}" data-key="${key}" ${store.readOnly?"disabled":""}>`; }
+function inpCell(key,label){ const v=raw(key); return `<input class="inp" inputmode="decimal" enterkeyhint="next" autocomplete="off" aria-label="${esc(label||key)}" value="${esc(inFmt(v))}" data-key="${key}" ${store.readOnly?"disabled":""}>`; }
 const isDone = w => !!raw("X!done_"+w);
 
 /* ---------- START ---------- */
 PAGES.start = {
-  title:"2016 Gelb Paprika 2026", subtitle:()=>t("appSub"),
+  title:()=>appTitle(), subtitle:()=>cropName(),
   render(){
     const w = ui.week, F_ = S("F",w), E_ = S("E",w), D_ = S("D",w), G_ = S("G",w);
     const pos = F_ >= 0;
@@ -4318,6 +4412,7 @@ PAGES.start = {
     const tot = (cell,k,d)=>`<div><div class="n">${fmt(G("S",cell),d)}</div><div class="l">${t(k)}</div></div>`;
     const clip = clipOf(w);
     return `
+    <div class="split">
     <section class="hero" aria-label="${t("week")} ${w}">
       <div class="hero-top">
         <div class="wk"><span>${t("week")}</span><b>${w}</b></div>
@@ -4346,13 +4441,14 @@ PAGES.start = {
       </dl>
       <button class="btn fill" onclick="go('woche')">${t(filled?"editWeek":"fillWeek",{w})}</button>
     </section>
-
-    <h2>${t("hTotals")}</h2>
+    <div>
+    <h2 class="first">${t("hTotals")}</h2>
     <div class="totals">
       ${tot("L3","totL3",1)}${tot("N3","totN3",1)}${tot("O3","totO3",1)}
       ${tot("P3","totP3",1)}${tot("X3","totX3",1)}${tot("AF3","totAF3",1)}
       ${tot("B57","totB57",0)}${tot("D57","totD57",0)}${tot("G57","totG57",0)}
     </div>
+    </div></div>
 
     <h2>${t("hCharts")}</h2>
     <div class="seg" role="group" aria-label="${t("chooseChart")}">${CHARTS.map((c,i)=>`<button aria-pressed="${ui.chart===i}" onclick="setChart(${i})">${t(c.short)}</button>`).join("")}</div>
@@ -4481,7 +4577,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{ if(ro
 
 /* ---------- DIESE WOCHE ---------- */
 PAGES.woche = {
-  title:()=>t("tabWeek"), subtitle:()=>t("week")+" "+ui.week+" · 2016 Gelb Paprika 2026",
+  title:()=>t("tabWeek"), subtitle:()=>t("week")+" "+ui.week+" · "+cropName(),
   render(){
     const w=ui.week, r=w+3, k=c=>"S!"+c+r;
     const prev=(c,d,unit="")=>{ if (w<2) return ""; const v=raw("S!"+c+(r-1)); return v===""?"":t("prev",{v:fmt(v,d)+unit}); };
@@ -4501,6 +4597,7 @@ PAGES.woche = {
     <div class="preview" id="preview"></div>
     <p class="saved">${t("autosave")}</p>
 
+    <div class="wkgrid"><div class="wkcol">
     <div class="fset"><h3><span class="num">1</span>${t("gLicht")}</h3>
       ${numField(k("B"),cn("B"),t("hintB"),{prev:prev("B",0)})}
       ${numField(k("C"),cn("C"),t("hintC"),{prev:prev("C",0," %")})}
@@ -4515,6 +4612,7 @@ PAGES.woche = {
       ${numField(k("AI"),t("lblAI"),t("hintAI"),{prev:prev("AI",1," °C")})}
       ${numField(k("AJ"),t("kgWeek"),t("hintAJ"),{prev:prev("AJ",1," kg")})}
     </div>
+    </div><div class="wkcol">
     <div class="fset" id="clips"><h3><span class="num">4</span>${t("hClips")}</h3>
       <p class="hint pad">${t("clipsLead")}</p>
       <div class="cohlist" id="cohlist" role="radiogroup" aria-label="${t("hClips")}">${cohList()}</div>
@@ -4522,14 +4620,16 @@ PAGES.woche = {
     </div>
     <div class="fset"><h3><span class="num">5</span>${t("hFinish")}</h3>
       <div id="finish" class="pad">${finishBox()}</div>
-    </div>`;
+    </div>
+    </div></div>`;
   },
   after(){ updatePreview(); },
   onInput(key){ updatePreview(); const l=$("#cohlist"); if(l) l.innerHTML=cohList(); const s=$("#cohsum"); if(s) s.innerHTML=cohSummary(); const tl2=$("#cohtl"); if(tl2) tl2.innerHTML=cohTimeline(curCohort(ui.week)); const f=$("#finish"); if(f){ ui.finishWarn=false; f.innerHTML=finishBox(); } }
 };
 function activeCohorts(w){
-  const N=WIN(), out=[];
-  for (let s=w; s>=Math.max(1,w-N); s--){ if (s===w || Mset(s)>0 || COH[s]) out.push(s); }
+  // exactly one entry per clip colour: this week (new) and the weeks before it
+  const n=Math.max(1,clipList().length), out=[];
+  for (let s=w; s>=Math.max(1,w-n+1); s--) out.push(s);
   return out;
 }
 function curCohort(w){ const list=activeCohorts(w); return list.includes(ui.cohort) ? ui.cohort : w; }
@@ -4653,6 +4753,7 @@ PAGES.inst = {
     <h2>${t("tabInst")}</h2>
     <p class="lead">${t("instLead")}</p>
     <div class="list">
+      ${item("inst-general","var(--surface-2)","var(--ink)","A",t("general"),t("itGeneral"))}
       ${item("inst-start","var(--pepper-tint)","var(--pepper)","S","Start",t("itStart"))}
       ${item("inst-clips","var(--blue-tint)","var(--blue)","C",t("hClips"),t("itClips"))}
       ${item("inst-licht","var(--gelb-tint)","var(--gelb-ink)","L",t("tabLicht"),t("itLicht"))}
@@ -4679,23 +4780,51 @@ PAGES["inst-start"] = {
 PAGES["inst-clips"] = {
   title:()=>t("hClips"), subtitle:()=>t("sub"), sub:1, parent:"inst",
   render(){
-    const list = String(raw("X!clips")).split(",").map(x=>x.trim());
-    while (list.length<8) list.push("");
-    const opts = cur => `<option value="">—</option>`+Object.keys(CLIPS).map(c=>`<option value="${c}" ${c===cur?"selected":""}>${clipName(c)}</option>`).join("");
-    return `<p class="lead">${t("clipCycleLead")}</p>
-    <div class="fset">
-      ${list.slice(0,8).map((c,i)=>`<div class="field"><label for="clip${i}">${swatch(c)}${t("colourN",{n:i+1})}</label><select class="inp" id="clip${i}" onchange="setClipColour(${i},this.value)" ${store.readOnly?"disabled":""}>${opts(c)}</select></div>`).join("")}
-    </div>
-    <div class="fset">
-      ${numField("X!clipStart",t("startWeek"),t("startWeekHint"))}
-      ${numField("X!window",t("windowLbl"),t("windowHint"))}
-    </div>
-    <h2>${t("comingWeeks")}</h2><div class="cycle" id="cyc">${this.cycle()}</div>`;
+    const list = clipList(), n=list.length, ro=store.readOnly?"disabled":"";
+    const avail = Object.keys(CLIPS).filter(c=>!list.includes(c));
+    const rows = list.map((c,i)=>`<div class="crow">
+        <span class="sw big" style="background:${CLIPS[c]||"transparent"}"></span>
+        <span class="crow-t"><b>${i+1}. ${esc(clipName(c))}</b><small>${t("week")} ${firstWeeks(i).join(", ")}</small></span>
+        <span class="crow-b">
+          <button class="ib" aria-label="${t("moveUp")}: ${esc(clipName(c))}" onclick="moveClip(${i},-1)" ${i===0||ro?"disabled":""}>${ICON.up}</button>
+          <button class="ib" aria-label="${t("moveDown")}: ${esc(clipName(c))}" onclick="moveClip(${i},1)" ${i===n-1||ro?"disabled":""}>${ICON.down}</button>
+          <button class="ib del" aria-label="${t("remove")}: ${esc(clipName(c))}" onclick="removeClip(${i})" ${n<=2||ro?"disabled":""}>${ICON.close}</button>
+        </span></div>`).join("");
+    return `<div class="warnbox" role="note"><b>${t("clipWarnTitle")}</b><p>${t("clipWarnText")}</p></div>
+    <div class="setgrid"><div>
+    <p class="lead">${t("clipCycleLead")}</p>
+    <div class="fset"><h3>${t("clipOrder")}</h3>${rows}
+      <p class="hint pad">${t("clipCountInfo",{n,k:WIN()})}</p></div>
+    <div class="fset"><h3>${t("addColour")}</h3>
+      <div class="chips">${avail.length?avail.map(c=>`<button class="chip" onclick="addClip('${c}')" ${ro}>${swatch(c)}${esc(clipName(c))}</button>`).join(""):`<p class="hint">${t("allUsed")}</p>`}</div></div>
+    </div><div>
+    <div class="fset"><div class="field"><label for="f_X!clipStart">${t("startWeek")}</label><input class="inp" id="f_X!clipStart" inputmode="numeric" autocomplete="off" value="${esc(inFmt(raw("X!clipStart")))}" data-key="X!clipStart" onfocus="if(!clipWarn()) this.blur()" ${ro}><div class="hint">${t("startWeekHint")}</div></div></div>
+    <h2>${t("comingWeeks")}</h2><div class="cycle" id="cyc">${this.cycle()}</div>
+    </div></div>`;
   },
-  cycle(){ let h=""; const w0=ui.week; for(let w=w0; w<Math.min(51,w0+10); w++){ const c=clipOf(w); h+=`<div>${swatch(c)}<b>${w}</b> ${esc(clipName(c))}</div>`; } return h; },
+  cycle(){ let h=""; const w0=ui.week; for(let w=w0; w<Math.min(51,w0+12); w++){ const c=clipOf(w); h+=`<div>${swatch(c)}<b>${w}</b> ${esc(clipName(c))}</div>`; } return h; },
   onInput(){ const el=$("#cyc"); if(el) el.innerHTML=this.cycle(); }
 };
-function setClipColour(i,v){ const list=String(raw("X!clips")).split(",").map(x=>x.trim()); while(list.length<8) list.push(""); list[i]=v; if(setInput("X!clips", list.join(","))){ refresh(true); } }
+ICON.up='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>';
+ICON.down='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+function firstWeeks(i){ const n=clipList().length, st=Number(raw("X!clipStart"))||1, out=[]; for(let w=Math.max(1,ui.week-n+1); w<=50 && out.length<3; w++){ if (((w-st)%n+n)%n===i) out.push(w); } return out.length?out:["–"]; }
+function clipWarn(){ if (ui.clipWarned) return true; if (!confirm(t("clipConfirm"))) return false; ui.clipWarned=true; return true; }
+function saveClips(list){ if (!clipWarn()) return; if (setInput("X!clips", list.join(","))) refresh(true); }
+function moveClip(i,d){ const l=clipList(); const j=i+d; if(j<0||j>=l.length) return; [l[i],l[j]]=[l[j],l[i]]; saveClips(l); }
+function removeClip(i){ const l=clipList(); if (l.length<=2) return; l.splice(i,1); saveClips(l); }
+function addClip(c){ const l=clipList(); if (l.includes(c)) return; l.push(c); saveClips(l); }
+PAGES["inst-general"] = {
+  title:()=>t("general"), subtitle:()=>t("sub"), sub:1, parent:"inst",
+  render(){
+    return `<div class="narrow"><div class="fset">
+      <div class="field"><label for="f_X!crop">${t("cropLbl")}</label><input class="inp wide" id="f_X!crop" type="text" autocomplete="off" value="${esc(raw("X!crop"))}" data-key="X!crop" data-text="1" ${store.readOnly?"disabled":""}><div class="hint">${t("cropHint")}</div></div>
+      ${numField("X!year",t("yearLbl"),t("yearHint"))}
+    </div>
+    <div class="titleprev" id="tprev">${this.prev()}</div></div>`;
+  },
+  prev(){ return `<img src="${MARK}" alt=""><span><b>${esc(appTitle())}</b><small>${esc(cropName())}</small></span>`; },
+  onInput(){ const el=$("#tprev"); if(el) el.innerHTML=this.prev(); renderBar(); renderTabs(); }
+};
 PAGES["inst-licht"] = {
   title:()=>t("tabLicht"), subtitle:()=>t("sub"), sub:1, parent:"inst",
   render(){
@@ -4809,7 +4938,7 @@ async function exportXlsx(){
     // 1. Start: weekly table as in the app
     const cols = ["B","C","D","E","F","G","H","I","J","K","L","M","N","O","AF","AG","AH","AI","AJ","AK","AL","AM","AP","AQ"];
     const head = [t("week")].concat(cols.map(c=>c==="M"?`${t("cSet")} (${t("gZet")})`:`${cn(c)}${cu(c)?" ("+cu(c)+")":""}`), [t("hFinish")]);
-    const aoa = [["2016 Gelb Paprika 2026"], head];
+    const aoa = [[appTitle()+" – "+cropName()], head];
     for (let w=1; w<=50; w++) aoa.push([w].concat(cols.map(c=> c==="AL" ? clipName(clipOf(w)) : num(C[c]&&C[c].in ? raw("S!"+c+(w+3)) : S(c,w))), [isDone(w)?"✓":""]));
     aoa.push([t("total")].concat(cols.map(c=>({L:"L3",N:"N3",O:"O3",AF:"AF3",B:"B57",D:"D57",G:"G57"})[c]?num(G("S",({L:"L3",N:"N3",O:"O3",AF:"AF3",B:"B57",D:"D57",G:"G57"})[c])):"")));
     add(aoa, "Start", [7].concat(cols.map(()=>14), [10]));
@@ -4838,11 +4967,11 @@ async function exportXlsx(){
     add(ja, t("joulesTitle"), [10,10,10,10]);
     // 6. Einstellungen
     const sa=[[t("setting"),t("value")]]; START_SET.forEach(([k,l])=>sa.push([t(l), num(raw(k))]));
-    sa.push([t("startWeek"), num(raw("X!clipStart"))],[t("windowLbl"), num(raw("X!window"))]);
-    String(raw("X!clips")).split(",").forEach((c,i)=>sa.push([t("colourN",{n:i+1}), clipName(c.trim())]));
+    sa.push([t("cropLbl"), cropName()],[t("yearLbl"), num(raw("X!year"))],[t("startWeek"), num(raw("X!clipStart"))]);
+    clipList().forEach((c,i)=>sa.push([t("colourN",{n:i+1}), clipName(c)]));
     add(sa, t("shSettings"), [40,14]);
     const out = XLSX.write(wb, {bookType:"xlsx", type:"array"});
-    await saveFile(`gelb-2016-2026-${new Date().toISOString().slice(0,10)}.xlsx`, new Blob([out],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    await saveFile(`${(cropName()+"-"+yearVal()).toLowerCase().replace(/[^a-z0-9äöüß-]+/g,"-")}-${new Date().toISOString().slice(0,10)}.xlsx`, new Blob([out],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
   }catch(e){ console.error(e); toast(t("excelFail")); }
 }
 
